@@ -1,0 +1,41 @@
+{
+	"name": "db3-console",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@monaco-editor/react": "^4.4.6",
+		"@polkadot/api": "^9.2.4",
+		"@polkadot/extension-dapp": "^0.44.6",
+		"@polkadot/types": "^9.2.4",
+		"@polkadot/ui-keyring": "^2.9.7",
+		"@polkadot/util": "^10.1.6",
+		"antd": "^4.23.2",
+		"axios": "^0.27.2",
+		"lodash": "^4.17.21",
+		"monaco-editor": "^0.34.0",
+		"pubsub-js": "^1.9.4",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.4.1",
+		"react-syntax-highlighter": "^15.5.0",
+		"react-use": "^17.4.0",
+		"recoil": "^0.7.5",
+		"sass": "^1.55.0",
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.14.185",
+		"@types/react": "^18.0.17",
+		"@types/react-dom": "^18.0.6",
+		"@types/react-syntax-highlighter": "^15.5.5",
+		"@vitejs/plugin-react": "^2.1.0",
+		"typescript": "^4.6.4",
+		"vite": "^3.1.0"
+	}
+}
