@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { atom, selector, selectorFamily } from "recoil";
 import _ from "lodash";
 import rpc from "../api/rpc.api";

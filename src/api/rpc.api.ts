@@ -7,7 +7,7 @@ export interface ApiResponse<T> {
 }
 
 const instance = axios.create({
-    baseURL: 'http://101.200.139.0:9933',
+   baseURL: 'https://dev.db3.network/rpc',
 });
 
 // instance.interceptors.request.use(config => {

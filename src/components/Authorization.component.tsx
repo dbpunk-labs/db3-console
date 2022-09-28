@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { memo, useState } from "react";
 import { Steps, Space, Tree, Radio, Button, message } from "antd";
 import { UserOutlined, HddOutlined, TableOutlined } from "@ant-design/icons";

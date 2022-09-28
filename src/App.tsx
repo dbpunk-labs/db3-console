@@ -28,7 +28,7 @@ export default () => {
 	useEffect(() => {
 		db3.init({
 			appName: "db3",
-			node: "ws://101.200.139.0:9944",
+			node: "wss://dev.db3.network/ws",
 		})
 			.then(() => {
 				return db3.loadAccounts("db3");
