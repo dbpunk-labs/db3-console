@@ -1,5 +1,14 @@
 import React, { memo, useState } from "react";
-import { Steps, Space, Tree, Radio, Button, message } from "antd";
+import {
+	Steps,
+	Space,
+	Tree,
+	Radio,
+	Button,
+	message,
+	Typography,
+	Tooltip,
+} from "antd";
 import { UserOutlined, HddOutlined, TableOutlined } from "@ant-design/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -11,12 +20,15 @@ import "../styles/authorizaton.scss";
 import { useParams } from "react-router-dom";
 
 const { Step } = Steps;
+const { Paragraph, Title } = Typography;
 
 const Authorization: React.FC<{}> = memo((props) => {
 	const { ownerAddress, delegateAddress } = useParams();
 	const treeData = [
 		{
-			title: "Owner account: 0xafff",
+			title: (
+				<div className='tree-header'>Owner account: {ownerAddress}</div>
+			),
 			key: "0-0",
 			icon: <UserOutlined />,
 			children: [
@@ -57,13 +69,21 @@ const Authorization: React.FC<{}> = memo((props) => {
 			<Steps labelPlacement='vertical'>
 				<Step
 					status='finish'
-					description='0xacbf'
+					description={
+						<Tooltip title={ownerAddress}>
+							<Paragraph ellipsis>{ownerAddress}</Paragraph>
+						</Tooltip>
+					}
 					icon={<UserOutlined />}
 				/>
 				<Step status='finish' title='Authorize' />
 				<Step
 					status='finish'
-					description='0xffddd'
+					description={
+						<Tooltip title={delegateAddress}>
+							<Paragraph ellipsis>{delegateAddress}</Paragraph>
+						</Tooltip>
+					}
 					icon={<UserOutlined />}
 				/>
 			</Steps>
@@ -73,7 +93,7 @@ const Authorization: React.FC<{}> = memo((props) => {
 					read your geolocation information stored in our private
 					database.
 				</p>
-				<Space>
+				<div className='authorize-graph'>
 					<div style={{ textAlign: "left", width: 330 }}>
 						<SyntaxHighlighter language='sql' style={docco}>
 							{sqlCode}
@@ -86,13 +106,13 @@ const Authorization: React.FC<{}> = memo((props) => {
 								defaultExpandAll
 								treeData={treeData}
 							/>
-							<div>
+							<div className='delegage-account'>
 								<UserOutlined />
-								Delegate Account: 0xddff
+								Delegate Account: {delegateAddress}
 							</div>
 						</Space>
 					</div>
-				</Space>
+				</div>
 				<Space>
 					Permission type:{" "}
 					<Radio value={true} onChange={() => setAccess(true)}>
@@ -115,7 +135,7 @@ const Authorization: React.FC<{}> = memo((props) => {
 				</Button>
 				<Button>Cancel</Button>
 			</div>
-			<p>Authorizina will redirect to httos://demo.db3.com</p>
+			<p>Authorizina will redirect to http://demo.db3.network/</p>
 		</div>
 	);
 });

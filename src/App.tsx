@@ -1,24 +1,38 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Spin } from "antd";
+import { Layout, Spin } from "antd";
 import { keyring } from "@polkadot/ui-keyring";
 import Console from "./components/Console.component";
 import Authorization from "./components/Authorization.component";
 import * as db3 from "./db3";
-import "./App.css";
+import "./App.scss";
+import Account from "./components/Account.component";
+
+const { Header, Content, Footer } = Layout;
 
 function App() {
 	return (
 		<div className='App'>
-			<Router>
-				<Routes>
-					<Route path='/:ownerAddress' element={<Console />}></Route>
-					<Route
-						path='/authorization/:ownerAddress/:delegateAddress'
-						element={<Authorization />}
-					/>
-				</Routes>
-			</Router>
+			<Layout className='layout'>
+				<Header className='header'>
+					<div className='logo'>DB3</div>
+					<Account />
+				</Header>
+				<Content style={{ padding: "20px 0" }}>
+					<Router>
+						<Routes>
+							<Route
+								path='/:ownerAddress'
+								element={<Console />}
+							></Route>
+							<Route
+								path='/authorization/:ownerAddress/:delegateAddress'
+								element={<Authorization />}
+							/>
+						</Routes>
+					</Router>
+				</Content>
+			</Layout>
 		</div>
 	);
 }
@@ -28,7 +42,7 @@ export default () => {
 	useEffect(() => {
 		db3.init({
 			appName: "db3",
-			node: "ws://101.200.139.0:9944",
+			node: "wss://dev.db3.network/ws",
 		})
 			.then(() => {
 				return db3.loadAccounts("db3");

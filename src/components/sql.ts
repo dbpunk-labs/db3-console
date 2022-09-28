@@ -1,5 +1,4 @@
-export const sqlCode = `create table SteonPlus_location(
-    account int not null primary key,
-    geo geometry not null
+export const sqlCode = `create table location(
+    coordinates VARCHAR(50)
 );
     `;

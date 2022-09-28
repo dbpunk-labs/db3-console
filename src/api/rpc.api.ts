@@ -1,41 +1,32 @@
-import axios from 'axios';
-import { message } from 'antd';
+import axios from "axios";
+import { message } from "antd";
 
 export interface ApiResponse<T> {
-    status: '0' | '1';
-    data: T;
+	status: "0" | "1";
+	data: T;
 }
 
 const instance = axios.create({
-    baseURL: 'http://101.200.139.0:9933',
+	baseURL: "//dev.db3.network/rpc/",
 });
 
-// instance.interceptors.request.use(config => {
-//     if (config.method === 'get') {
-//         if (!config.params) {
-//             config.params = {};
-//         }
-//         config.params._t = Date.now();
-//     }
-//     return config;
-// });
 instance.interceptors.response.use(
-    response => {
-        const { result, error, id } = response.data;
-        if (error) {
-            message.error(`code：${error}`);
-            return Promise.reject(error);
-        }
-        return { result, id };
-    },
-    error => {
-        console.error(error);
-        const errorMsg = error?.response?.data?.msg || error.toString();
-        message.error(errorMsg);
-        return Promise.reject(error);
-    },
+	(response) => {
+		const { result, error, id } = response.data;
+		if (error) {
+			message.error(`code：${error}`);
+			return Promise.reject(error);
+		}
+		return { result, id };
+	},
+	(error) => {
+		console.error(error);
+		const errorMsg = error?.response?.data?.msg || error.toString();
+		message.error(errorMsg);
+		return Promise.reject(error);
+	},
 );
 
 export default (method: string, params: any) => {
-    return instance.post('/', { jsonrpc: '2.0', id: null, method, params });
+	return instance.post("/", { jsonrpc: "2.0", id: null, method, params });
 };
