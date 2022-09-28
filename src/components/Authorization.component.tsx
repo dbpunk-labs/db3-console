@@ -68,7 +68,7 @@ const Authorization: React.FC<{}> = memo((props) => {
 				/>
 			</Steps>
 			<div className='agreement'>
-				<p>
+				<p style={{ textAlign: "left" }}>
 					Next. a StepnPlus namespace will be created to write and
 					read your geolocation information stored in our private
 					database.

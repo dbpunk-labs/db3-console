@@ -2,7 +2,7 @@
 import React, { memo, useState } from "react";
 import { keyring } from "@polkadot/ui-keyring";
 import Editor from "@monaco-editor/react";
-import { Button, Collapse, Table, Popconfirm, message, Card } from "antd";
+import { Button, Collapse, Table, Popconfirm, message, Card, Spin } from "antd";
 import { BarsOutlined } from "@ant-design/icons";
 import { useAsyncFn } from "react-use";
 import _ from "lodash";
@@ -45,46 +45,57 @@ const SQLEditor: React.FC<any> = memo((props) => {
 		sql && exec(sql);
 	}
 
-	const refreshDelegates = useRecoilRefresher_UNSTABLE(delegatesSelector);
-	function deleteDelegate(address: string) {
-		db3.deleteDelegate(address, keyring.getPair(ownerAddress)).then(() => {
-			message.success("Delete succeeded!");
-			refreshDelegates();
-		});
-	}
+	const refreshDelegates = useRecoilRefresher_UNSTABLE(
+		delegatesSelector(ownerAddress),
+	);
+	const [deleteDelegateState, deleteDelegate] = useAsyncFn(
+		(address: string) => {
+			return db3
+				.deleteDelegate(address, keyring.getPair(ownerAddress))
+				.then(() => {
+					message.success("Delete succeeded!");
+					refreshDelegates();
+				});
+		},
+		[refreshDelegates],
+	);
 	return (
 		<div className='sql-editor'>
 			<Collapse>
 				<Panel header='Authorzie list'>
-					<Table
-						rowKey='appName'
-						dataSource={tableData}
-						pagination={false}
-					>
-						<Column title='APP' dataIndex='appName' />
-						<Column
-							title='Access'
-							dataIndex='access'
-							render={(type) => {
-								if (type === 1) {
-									return "Read and write";
-								} else {
-									return "Read";
-								}
-							}}
-						/>
-						<Column
-							dataIndex='address'
-							render={(address) => (
-								<Popconfirm
-									title='Are you sure to delete this authorization?'
-									onConfirm={() => deleteDelegate(address)}
-								>
-									<Button type='link'>delete</Button>
-								</Popconfirm>
-							)}
-						/>
-					</Table>
+					<Spin spinning={deleteDelegateState.loading}>
+						<Table
+							rowKey='appName'
+							dataSource={tableData}
+							pagination={false}
+						>
+							<Column title='APP' dataIndex='appName' />
+							<Column
+								title='Access'
+								dataIndex='access'
+								render={(type) => {
+									if (type === 1) {
+										return "Read and write";
+									} else {
+										return "Read";
+									}
+								}}
+							/>
+							<Column
+								dataIndex='address'
+								render={(address) => (
+									<Popconfirm
+										title='Are you sure to delete this authorization?'
+										onConfirm={() =>
+											deleteDelegate(address)
+										}
+									>
+										<Button type='link'>delete</Button>
+									</Popconfirm>
+								)}
+							/>
+						</Table>
+					</Spin>
 				</Panel>
 				<Panel header='SQL editor' key='1'>
 					<Button
