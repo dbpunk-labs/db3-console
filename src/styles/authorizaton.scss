@@ -1,5 +1,5 @@
 .authorizaton {
-	width: 700px;
+	width: 900px;
 	margin: 0 auto;
 	.btn-container {
 		margin-top: 20px;
@@ -18,5 +18,17 @@
 		.ant-btn {
 			margin-right: 12px;
 		}
+	}
+	.tree-header,
+	.delegage-account {
+		display: inline-block;
+		white-space: nowrap;
+		width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+	}
+	.authorize-graph {
+		display: flex;
 	}
 }

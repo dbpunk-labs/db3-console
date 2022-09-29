@@ -1,20 +1,20 @@
 #root {
 	width: 100%;
 	margin: 0 auto;
-	padding: 2rem;
+	// padding: 2rem;
 	text-align: center;
 }
 
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
+.layout {
+	.logo {
+		color: #fff;
+		float: left;
+		margin-right: 20px;
+	}
 }
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-	filter: drop-shadow(0 0 2em #61dafbaa);
+.header {
+	display: flex;
+	justify-content: space-between;
 }
 
 @keyframes logo-spin {
