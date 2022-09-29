@@ -58,7 +58,12 @@ export default () => {
 	}, []);
 
 	return (
-		<Spin spinning={!ready} tip='Connecting to DB3' size='large'>
+		<Spin
+			spinning={!ready}
+			tip='Connecting to DB3'
+			size='large'
+			style={{ top: 130 }}
+		>
 			{ready && <App />}
 		</Spin>
 	);
