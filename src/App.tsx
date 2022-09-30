@@ -42,7 +42,7 @@ export default () => {
 	useEffect(() => {
 		db3.init({
 			appName: "db3",
-			node: "wss://dev.db3.network/ws",
+			node: import.meta.env.VITE_RPC,
 		})
 			.then(() => {
 				return db3.loadAccounts("db3");

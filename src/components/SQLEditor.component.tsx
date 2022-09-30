@@ -26,15 +26,13 @@ const SQLEditor: React.FC<any> = memo((props) => {
 	const [sqlState, exec] = useAsyncFn(
 		async (sql: string) => {
 			try {
-				return await db3
-					.runSqlByDelegate(ownerAddress, sql)
-					.then((data) => {
-						if (data.status === 0) {
-							return data.data;
-						} else {
-							message.error(data.msg);
-						}
-					});
+				return await db3.runSqlByOwner(sql).then((data) => {
+					if (data.status === 0) {
+						return data.data;
+					} else {
+						message.error(data.msg);
+					}
+				});
 			} catch (error) {
 				console.error(error);
 			}

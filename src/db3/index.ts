@@ -411,8 +411,44 @@ export async function deleteDelegate(
 	return singed("deleteDelegate", paramFields, inputParams, account);
 }
 
-export async function runSqlByOwner(sql: string, ns: string) {
-	return singed("runSqlByOwner", paramFields, inputParams);
+export async function runSqlByOwner(
+	sql: string,
+	account: any,
+	ns: string = "StepnPlus",
+) {
+	const reqId = uuid();
+	const paramFields = [
+		{
+			name: "data",
+			optional: false,
+			type: "Bytes",
+		},
+		{
+			name: "reqId",
+			optional: false,
+			type: "Bytes",
+		},
+		{
+			name: "ns",
+			optional: false,
+			type: "Bytes",
+		},
+	];
+	const inputParams = [
+		{
+			type: "Bytes",
+			value: sql,
+		},
+		{
+			type: "Bytes",
+			value: reqId,
+		},
+		{
+			type: "Bytes",
+			value: ns,
+		},
+	];
+	return singed("runSqlByOwner", paramFields, inputParams, account);
 }
 
 export async function runSqlByDelegate(

@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc && vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"build:docker": "docker build -t zhaojun7/console.db3:v1 ."
 	},
 	"dependencies": {
 		"@monaco-editor/react": "^4.4.6",

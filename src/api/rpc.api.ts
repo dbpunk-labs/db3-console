@@ -7,7 +7,7 @@ export interface ApiResponse<T> {
 }
 
 const instance = axios.create({
-	baseURL: "//dev.db3.network/rpc/",
+	baseURL: import.meta.env.VITE_RPC_API,
 });
 
 instance.interceptors.response.use(
