@@ -32,6 +32,7 @@ function App() {
 						</Routes>
 					</Router>
 				</Content>
+				<Footer style={{ textAlign: "center" }}>合约地址</Footer>
 			</Layout>
 		</div>
 	);

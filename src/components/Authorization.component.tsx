@@ -43,6 +43,11 @@ const Authorization: React.FC<{}> = memo((props) => {
 							key: "0-0-0-1",
 							icon: <TableOutlined />,
 						},
+						{
+							title: "table: steps",
+							key: "0-0-0-2",
+							icon: <TableOutlined />,
+						},
 					],
 				},
 			],
@@ -95,7 +100,13 @@ const Authorization: React.FC<{}> = memo((props) => {
 					database.
 				</p>
 				<div className='authorize-graph'>
-					<div style={{ textAlign: "left", width: 330 }}>
+					<div
+						style={{
+							textAlign: "left",
+							width: 330,
+							marginRight: 30,
+						}}
+					>
 						<SyntaxHighlighter language='sql' style={docco}>
 							{sqlCode}
 						</SyntaxHighlighter>
@@ -106,6 +117,7 @@ const Authorization: React.FC<{}> = memo((props) => {
 								showIcon
 								defaultExpandAll
 								treeData={treeData}
+								style={{ backgroundColor: "transparent" }}
 							/>
 							<div className='delegage-account'>
 								<UserOutlined />
