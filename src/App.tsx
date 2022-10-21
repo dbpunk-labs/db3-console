@@ -7,6 +7,7 @@ import Authorization from "./components/Authorization.component";
 import * as db3 from "./db3";
 import "./App.scss";
 import Account from "./components/Account.component";
+import Contract from "./components/Contract.component";
 
 const { Header, Content, Footer } = Layout;
 
@@ -21,10 +22,11 @@ function App() {
 				<Content style={{ padding: "20px 0" }}>
 					<Router>
 						<Routes>
+							<Route path='/' element={<Console />}></Route>
 							<Route
-								path='/:ownerAddress'
-								element={<Console />}
-							></Route>
+								path='/:contactAddress'
+								element={<Contract />}
+							/>
 							<Route
 								path='/authorization/:ownerAddress/:delegateAddress'
 								element={<Authorization />}

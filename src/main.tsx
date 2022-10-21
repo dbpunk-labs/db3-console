@@ -8,7 +8,7 @@ import App from "./App";
 import "antd/dist/antd.css";
 import "./index.css";
 
-document.domain = "db3.network";
+// document.domain = "db3.network";
 self.MonacoEnvironment = {
 	getWorker(_, label) {
 		return new editorWorker();

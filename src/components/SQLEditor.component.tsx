@@ -1,8 +1,17 @@
-// @ts-nocheck
 import React, { memo, useState } from "react";
 import { keyring } from "@polkadot/ui-keyring";
 import Editor from "@monaco-editor/react";
-import { Button, Collapse, Table, Popconfirm, message, Card, Spin } from "antd";
+import {
+	Button,
+	Collapse,
+	Table,
+	Popconfirm,
+	message,
+	Card,
+	Spin,
+	Select,
+	Space,
+} from "antd";
 import { BarsOutlined } from "@ant-design/icons";
 import { useAsyncFn } from "react-use";
 import _ from "lodash";
@@ -13,6 +22,7 @@ import { delegatesSelector } from "../state";
 
 const { Panel } = Collapse;
 const { Column } = Table;
+const { Option } = Select;
 
 const SQLEditor: React.FC<any> = memo((props) => {
 	const { ownerAddress } = useParams();
@@ -22,11 +32,12 @@ const SQLEditor: React.FC<any> = memo((props) => {
 		appName: item[1],
 		access: item[2],
 	}));
+	const [namsepace, setNamespace] = useState();
 	const [sql, setSQL] = useState<string>();
 	const [sqlState, exec] = useAsyncFn(
 		async (sql: string) => {
 			try {
-				return await db3.runSqlByOwner(sql).then((data) => {
+				return await db3.runSqlByOwner(sql, namsepace).then((data) => {
 					if (data.status === 0) {
 						return data.data;
 					} else {
@@ -96,14 +107,25 @@ const SQLEditor: React.FC<any> = memo((props) => {
 					</Spin>
 				</Panel>
 				<Panel header='SQL editor' key='1'>
-					<Button
-						style={{ marginBottom: 7 }}
-						type='primary'
-						onClick={onClick}
-						loading={sqlState.loading}
-					>
-						RUN
-					</Button>
+					<Space>
+						<Select
+							style={{ width: 150 }}
+							value={namsepace}
+							onChange={(value) => setNamespace(value)}
+						>
+							<Option value='StepnPlus'>StepnPlus</Option>
+							<Option value='my_detwitter'>my_detwitter</Option>
+						</Select>
+						<Button
+							style={{ marginBottom: 7 }}
+							type='primary'
+							onClick={onClick}
+							loading={sqlState.loading}
+						>
+							RUN
+						</Button>
+					</Space>
+
 					<Editor
 						theme='vs-dark'
 						height='30vh'
