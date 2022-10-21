@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Layout, Spin } from "antd";
 import { keyring } from "@polkadot/ui-keyring";
+import { useRecoilValue } from "recoil";
 import Console from "./components/Console.component";
 import Authorization from "./components/Authorization.component";
-import * as db3 from "./db3";
-import "./App.scss";
 import Account from "./components/Account.component";
 import Contract from "./components/Contract.component";
+import * as db3 from "./db3";
+
+import "./App.scss";
+import { ownerAddressAtom } from "./state";
 
 const { Header, Content, Footer } = Layout;
 
@@ -42,6 +45,7 @@ function App() {
 
 export default () => {
 	const [ready, setReady] = useState(false);
+	const ownerAddress = useRecoilValue(ownerAddressAtom);
 	useEffect(() => {
 		db3.init({
 			appName: "db3",
@@ -51,11 +55,9 @@ export default () => {
 				return db3.loadAccounts("db3");
 			})
 			.then(() => {
-				db3.setCurrentAccount(
-					keyring.getPair(
-						"5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
-					),
-				);
+				if (ownerAddress) {
+					db3.setCurrentAccount(keyring.getPair(ownerAddress));
+				}
 				setReady(true);
 			});
 	}, []);

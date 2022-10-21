@@ -18,14 +18,14 @@ import _ from "lodash";
 import { useParams } from "react-router-dom";
 import * as db3 from "../db3";
 import { useRecoilValue, useRecoilRefresher_UNSTABLE } from "recoil";
-import { delegatesSelector } from "../state";
+import { delegatesSelector, ownerAddressAtom } from "../state";
 
 const { Panel } = Collapse;
 const { Column } = Table;
 const { Option } = Select;
 
 const SQLEditor: React.FC<any> = memo((props) => {
-	const { ownerAddress } = useParams();
+	const ownerAddress = useRecoilValue(ownerAddressAtom);
 	const delegates = useRecoilValue(delegatesSelector(ownerAddress));
 	const tableData = delegates?.map((item) => ({
 		address: item[0],
@@ -48,7 +48,7 @@ const SQLEditor: React.FC<any> = memo((props) => {
 				console.error(error);
 			}
 		},
-		[ownerAddress],
+		[namsepace],
 	);
 	function onClick() {
 		sql && exec(sql);
