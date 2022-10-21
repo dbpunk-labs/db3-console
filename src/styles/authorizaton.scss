@@ -1,6 +1,7 @@
 .authorizaton {
 	width: 900px;
 	margin: 0 auto;
+	text-align: center;
 	.btn-container {
 		margin-top: 20px;
 		margin-bottom: 7px;
@@ -18,6 +19,9 @@
 		.ant-btn {
 			margin-right: 12px;
 		}
+	}
+	.ant-tree {
+		background-color: transparent;
 	}
 	.tree-header,
 	.delegage-account {

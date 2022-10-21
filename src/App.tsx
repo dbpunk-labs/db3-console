@@ -32,6 +32,7 @@ function App() {
 						</Routes>
 					</Router>
 				</Content>
+				<Footer style={{ textAlign: "center" }}>合约地址</Footer>
 			</Layout>
 		</div>
 	);
@@ -42,7 +43,7 @@ export default () => {
 	useEffect(() => {
 		db3.init({
 			appName: "db3",
-			node: "wss://dev.db3.network/ws",
+			node: import.meta.env.VITE_RPC,
 		})
 			.then(() => {
 				return db3.loadAccounts("db3");
