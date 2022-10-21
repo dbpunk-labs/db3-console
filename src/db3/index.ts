@@ -205,6 +205,9 @@ async function singed(
 	inputParams: InputParam[],
 	account: any = currentAccount,
 ) {
+	if (account.isLocked) {
+		account.unlock("12345678");
+	}
 	const api = await apiPromise;
 	const fromAcct = await getFromAcct(account);
 	const reqIdIndex = paramFields.findIndex((item) => item.name === "reqId");
@@ -410,11 +413,7 @@ export async function deleteDelegate(
 	return singed("deleteDelegate", paramFields, inputParams, account);
 }
 
-export async function runSqlByOwner(
-	sql: string,
-	account: any,
-	ns: string = "StepnPlus",
-) {
+export async function runSqlByOwner(sql: string, ns: string) {
 	const reqId = uuid();
 	const paramFields = [
 		{
@@ -447,7 +446,7 @@ export async function runSqlByOwner(
 			value: ns,
 		},
 	];
-	return singed("runSqlByOwner", paramFields, inputParams, account);
+	return singed("runSqlByOwner", paramFields, inputParams);
 }
 
 export async function runSqlByDelegate(
