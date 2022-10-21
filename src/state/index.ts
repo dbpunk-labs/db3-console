@@ -8,9 +8,21 @@ export const delegateAddressAtom = atom<string | null>({
 	default: null,
 });
 
-export const ownerAddressAtom = atom({
+export const ownerAddressAtom = atom<string>({
 	key: "ownerAddressAtom",
-	default: null,
+	default: selector({
+		key: "ownerAddressAtom/default",
+		get: () => {
+			return localStorage.getItem("dtwitter_owner_address");
+		},
+	}),
+	effects: [
+		({ onSet }) => {
+			onSet((value) => {
+				localStorage.setItem("dtwitter_owner_address", value);
+			});
+		},
+	],
 });
 
 export const delegatesSelector = selectorFamily({

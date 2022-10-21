@@ -324,8 +324,7 @@ export async function addDelegate(
 
 export async function createNsAndAddDelegate(
 	delegateAddress: string,
-	account: any,
-	ns: string = "StepnPlus",
+	ns: string,
 ) {
 	const reqId = uuid();
 	const paramFields = [
@@ -368,7 +367,7 @@ export async function createNsAndAddDelegate(
 			value: reqId,
 		},
 	];
-	return singed("createNsAndAddDelegate", paramFields, inputParams, account);
+	return singed("createNsAndAddDelegate", paramFields, inputParams);
 }
 
 export async function deleteDelegate(
