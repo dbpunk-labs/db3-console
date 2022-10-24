@@ -27,7 +27,7 @@ function App() {
 						<Routes>
 							<Route path='/' element={<Console />}></Route>
 							<Route
-								path='/:contactAddress'
+								path='/contract/:contactAddress'
 								element={<Contract />}
 							/>
 							<Route
