@@ -24,7 +24,7 @@ const Console: React.FC<{}> = memo((props) => {
 		return Promise.resolve();
 	}
 	return (
-		<div>
+		<div style={{ padding: 20 }}>
 			<Upload
 				action={uploadUrl}
 				showUploadList={false}
