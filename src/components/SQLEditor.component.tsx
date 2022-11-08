@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { memo, useState } from "react";
 import { keyring } from "@polkadot/ui-keyring";
 import Editor from "@monaco-editor/react";

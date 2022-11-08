@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { memo, Suspense } from "react";
 import { Upload, Button } from "antd";
 import { keyring } from "@polkadot/ui-keyring";

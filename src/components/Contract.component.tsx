@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { memo } from "react";
 import rpc from "../api/rpc.api";
 import { useAsyncFn, useAsync } from "react-use";
